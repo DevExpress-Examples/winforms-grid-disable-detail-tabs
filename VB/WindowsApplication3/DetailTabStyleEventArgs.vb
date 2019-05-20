@@ -1,5 +1,4 @@
-Imports Microsoft.VisualBasic
-Imports System
+﻿Imports System
 Imports System.Collections.Generic
 Imports System.Windows.Forms
 Imports DevExpress.Skins
@@ -9,8 +8,13 @@ Namespace DXSample
 
 	Public Class DetailTabStyleEventArgs
 		Inherits EventArgs
+
+'INSTANT VB NOTE: The field enabled was renamed since Visual Basic does not allow fields to have the same name as other class members:
 		Private enabled_Renamed As Boolean
+'INSTANT VB NOTE: The field relationIndex was renamed since Visual Basic does not allow fields to have the same name as other class members:
+'INSTANT VB NOTE: The field rowHandle was renamed since Visual Basic does not allow fields to have the same name as other class members:
 		Private relationIndex_Renamed, rowHandle_Renamed As Integer
+'INSTANT VB NOTE: The field relationName was renamed since Visual Basic does not allow fields to have the same name as other class members:
 		Private relationName_Renamed As String
 
 		Public Sub New(ByVal rowHandle As Integer, ByVal relationName As String, ByVal relationIndex As Integer, ByVal enabled As Boolean)

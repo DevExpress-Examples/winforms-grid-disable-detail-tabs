@@ -1,5 +1,4 @@
-Imports Microsoft.VisualBasic
-Imports System
+﻿Imports System
 Imports System.Collections.Generic
 Imports System.Windows.Forms
 Imports DevExpress.Skins
@@ -18,6 +17,7 @@ Namespace DXSample
 
 	Public Class MyGridControl
 		Inherits GridControl
+
 		Protected Overrides Function CreateDefaultView() As BaseView
 			Return CreateView("MyGridView")
 		End Function
@@ -29,6 +29,7 @@ Namespace DXSample
 
 	Public Class MyGridViewInfoRegistrator
 		Inherits GridInfoRegistrator
+
 		Public Overrides ReadOnly Property ViewName() As String
 			Get
 				Return "MyGridView"
@@ -41,6 +42,7 @@ Namespace DXSample
 
 	Public Class MyGridView
 		Inherits DevExpress.XtraGrid.Views.Grid.GridView
+
 		Public Event DetailTabStyle As DetailTabStyleEventHandler
 
 		Public Sub New()
@@ -63,7 +65,7 @@ Namespace DXSample
 			End If
 			Dim vIndex As Integer = GetVisibleDetailRelationIndex(rowHandle)
 			For Each detail As GridDetailInfo In details
-				If (Not OptionsDetail.AllowExpandEmptyDetails) AndAlso IsMasterRowEmptyEx(rowHandle, detail.RelationIndex) Then
+				If Not OptionsDetail.AllowExpandEmptyDetails AndAlso IsMasterRowEmptyEx(rowHandle, detail.RelationIndex) Then
 					Continue For
 				End If
 				Dim detailRows As Integer = DataController.GetDetailList(rowHandle, detail.RelationIndex).Count
@@ -106,16 +108,17 @@ Namespace DXSample
 		End Sub
 
 		Friend Function GetDetailInfo(ByVal rowHandle As Integer, ByVal shortInfo As Boolean) As GridDetailInfo()
-			If (Not AllowMasterDetail) OrElse GridControl Is Nothing Then
+			If Not AllowMasterDetail OrElse GridControl Is Nothing Then
 				Return Nothing
 			End If
-			Dim levelNode As GridLevelNode = GetLevelNode()
-			If GridControl.ShowOnlyPredefinedDetails AndAlso (levelNode Is Nothing OrElse (Not levelNode.HasChildren)) Then
+'INSTANT VB NOTE: The variable levelNode was renamed since Visual Basic does not handle local variables named the same as class members well:
+			Dim levelNode_Renamed As GridLevelNode = GetLevelNode()
+			If GridControl.ShowOnlyPredefinedDetails AndAlso (levelNode_Renamed Is Nothing OrElse Not levelNode_Renamed.HasChildren) Then
 				Return Nothing
 			End If
 			Dim details As New ArrayList()
 			If GridControl.ShowOnlyPredefinedDetails Then
-				For Each node As GridLevelNode In levelNode.Nodes
+				For Each node As GridLevelNode In levelNode_Renamed.Nodes
 					Dim id As Integer = GetRelationIndex(rowHandle, node.RelationName)
 					If id < -1 Then
 						Continue For
@@ -125,12 +128,9 @@ Namespace DXSample
 			Else
 				Dim count As Integer = GetRelationCount(rowHandle)
 				For n As Integer = 0 To count - 1
-					Dim name As String = GetRelationName(rowHandle, n)
-					If shortInfo Then
-						details.Add(New GridDetailInfo(n, name,name))
-					Else
-						details.Add(New GridDetailInfo(n, name,GetRelationDisplayName(rowHandle, n)))
-					End If
+'INSTANT VB NOTE: The variable name was renamed since Visual Basic does not handle local variables named the same as class members well:
+					Dim name_Renamed As String = GetRelationName(rowHandle, n)
+					details.Add(New GridDetailInfo(n, name_Renamed,If(shortInfo, name_Renamed, GetRelationDisplayName(rowHandle, n))))
 				Next n
 			End If
 			If details.Count = 0 Then
@@ -143,6 +143,19 @@ Namespace DXSample
 	Public Class DisableViewTabPage
 		Inherits ViewTabPage
 		Implements IXtraTabPage
+
+		Private ReadOnly Property IXtraTabPage_TabControl() As IXtraTab Implements IXtraTabPage.TabControl
+			Get
+				Return MyBase.TabControl
+			End Get
+		End Property
+
+		Private ReadOnly Property IXtraTabPage_Text() As String Implements IXtraTabPage.Text
+			Get
+				Return MyBase.Text
+			End Get
+		End Property
+
 		Public Sub New(ByVal tabControl As ViewTab)
 			MyBase.New(tabControl)
 		End Sub
@@ -152,27 +165,27 @@ Namespace DXSample
 				Return Nothing
 			End Get
 		End Property
-		Private ReadOnly Property ImageIndex() As Integer Implements IXtraTabPage.ImageIndex
+		Private ReadOnly Property IXtraTabPage_ImageIndex() As Integer Implements IXtraTabPage.ImageIndex
 			Get
 				Return -1
 			End Get
 		End Property
-		Private ReadOnly Property TabPageWidth() As Integer Implements IXtraTabPage.TabPageWidth
+		Private ReadOnly Property IXtraTabPage_TabPageWidth() As Integer Implements IXtraTabPage.TabPageWidth
 			Get
 				Return 0
 			End Get
 		End Property
-		Private ReadOnly Property PageEnabled() As Boolean Implements IXtraTabPage.PageEnabled
+		Private ReadOnly Property IXtraTabPage_PageEnabled() As Boolean Implements IXtraTabPage.PageEnabled
 			Get
 				Return False
 			End Get
 		End Property
-		Private ReadOnly Property PageVisible() As Boolean Implements IXtraTabPage.PageVisible
+		Private ReadOnly Property IXtraTabPage_PageVisible() As Boolean Implements IXtraTabPage.PageVisible
 			Get
 				Return True
 			End Get
 		End Property
-		Private Sub Invalidate() Implements IXtraTabPage.Invalidate
+		Private Sub IXtraTabPage_Invalidate() Implements IXtraTabPage.Invalidate
 			TabControl.Invalidate(TabControl.Bounds)
 		End Sub
 		Private ReadOnly Property IXtraTabPage_Appearance() As PageAppearance Implements IXtraTabPage.Appearance
@@ -180,33 +193,33 @@ Namespace DXSample
 				Return Nothing
 			End Get
 		End Property
-		Private ReadOnly Property Tooltip() As String Implements IXtraTabPage.Tooltip
+		Private ReadOnly Property IXtraTabPage_Tooltip() As String Implements IXtraTabPage.Tooltip
 			Get
 				Return String.Empty
 			End Get
 		End Property
-		Private ReadOnly Property TooltipTitle() As String Implements IXtraTabPage.TooltipTitle
+		Private ReadOnly Property IXtraTabPage_TooltipTitle() As String Implements IXtraTabPage.TooltipTitle
 			Get
 				Return String.Empty
 			End Get
 		End Property
-		Private ReadOnly Property TooltipIconType() As ToolTipIconType Implements IXtraTabPage.TooltipIconType
+		Private ReadOnly Property IXtraTabPage_TooltipIconType() As ToolTipIconType Implements IXtraTabPage.TooltipIconType
 			Get
 				Return ToolTipIconType.None
 			End Get
 		End Property
-		Private ReadOnly Property SuperTip() As SuperToolTip Implements IXtraTabPage.SuperTip
+		Private ReadOnly Property IXtraTabPage_SuperTip() As SuperToolTip Implements IXtraTabPage.SuperTip
 			Get
 				Return Nothing
 			End Get
 		End Property
-		Private ReadOnly Property ShowCloseButton() As DefaultBoolean Implements IXtraTabPage.ShowCloseButton
+		Private ReadOnly Property IXtraTabPage_ShowCloseButton() As DefaultBoolean Implements IXtraTabPage.ShowCloseButton
 			Get
 				Return DefaultBoolean.Default
 			End Get
 		End Property
 
-		Private ReadOnly Property ImagePadding() As System.Windows.Forms.Padding Implements IXtraTabPage.ImagePadding
+		Private ReadOnly Property IXtraTabPage_ImagePadding() As System.Windows.Forms.Padding Implements IXtraTabPage.ImagePadding
 			Get
 				Return New System.Windows.Forms.Padding(0)
 			End Get

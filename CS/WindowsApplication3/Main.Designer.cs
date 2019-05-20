@@ -26,8 +26,6 @@ namespace DXSample {
             this.components = new System.ComponentModel.Container();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.myGridControl1 = new DXSample.MyGridControl();
-            this.customersBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.nwindDataSet = new DXSample.nwindDataSet();
             this.myGridView1 = new DXSample.MyGridView();
             this.colCustomerID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCompanyName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -40,14 +38,8 @@ namespace DXSample {
             this.colCountry = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPhone = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFax = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.ordersBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ordersTableAdapter = new DXSample.nwindDataSetTableAdapters.OrdersTableAdapter();
-            this.customersTableAdapter = new DXSample.nwindDataSetTableAdapters.CustomersTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.myGridControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.customersBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nwindDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.myGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ordersBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // defaultLookAndFeel1
@@ -56,7 +48,6 @@ namespace DXSample {
             // 
             // myGridControl1
             // 
-            this.myGridControl1.DataSource = this.customersBindingSource;
             this.myGridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.myGridControl1.Location = new System.Drawing.Point(0, 0);
             this.myGridControl1.MainView = this.myGridView1;
@@ -65,16 +56,6 @@ namespace DXSample {
             this.myGridControl1.TabIndex = 0;
             this.myGridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.myGridView1});
-            // 
-            // customersBindingSource
-            // 
-            this.customersBindingSource.DataMember = "Customers";
-            this.customersBindingSource.DataSource = this.nwindDataSet;
-            // 
-            // nwindDataSet
-            // 
-            this.nwindDataSet.DataSetName = "nwindDataSet";
-            this.nwindDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // myGridView1
             // 
@@ -172,19 +153,6 @@ namespace DXSample {
             this.colFax.Visible = true;
             this.colFax.VisibleIndex = 10;
             // 
-            // ordersBindingSource
-            // 
-            this.ordersBindingSource.DataMember = "Orders";
-            this.ordersBindingSource.DataSource = this.nwindDataSet;
-            // 
-            // ordersTableAdapter
-            // 
-            this.ordersTableAdapter.ClearBeforeFill = true;
-            // 
-            // customersTableAdapter
-            // 
-            this.customersTableAdapter.ClearBeforeFill = true;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -196,10 +164,7 @@ namespace DXSample {
             this.Text = "DetailTabStyle";
             this.Load += new System.EventHandler(this.OnFormLoad);
             ((System.ComponentModel.ISupportInitialize)(this.myGridControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.customersBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nwindDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.myGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ordersBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -209,11 +174,6 @@ namespace DXSample {
         private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel1;
         private MyGridControl myGridControl1;
         private MyGridView myGridView1;
-        private nwindDataSet nwindDataSet;
-        private System.Windows.Forms.BindingSource ordersBindingSource;
-        private DXSample.nwindDataSetTableAdapters.OrdersTableAdapter ordersTableAdapter;
-        private System.Windows.Forms.BindingSource customersBindingSource;
-        private DXSample.nwindDataSetTableAdapters.CustomersTableAdapter customersTableAdapter;
         private DevExpress.XtraGrid.Columns.GridColumn colCustomerID;
         private DevExpress.XtraGrid.Columns.GridColumn colCompanyName;
         private DevExpress.XtraGrid.Columns.GridColumn colContactName;
