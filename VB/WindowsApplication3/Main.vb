@@ -12,11 +12,12 @@ Namespace DXSample
 	Partial Public Class Main
 		Inherits XtraForm
 
-        Public Sub New()
-            InitializeComponent()
-        End Sub
+		Public Sub New()
+			InitializeComponent()
+		End Sub
 
-        Private Sub OnFormLoad(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
+
+		Private Sub OnFormLoad(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 			Dim dataSet1 As New DataSet()
 			dataSet1.Tables.Add(DataHelper.CreateTable())
 			dataSet1.Tables.Add(DataHelper.CreateChildTable())

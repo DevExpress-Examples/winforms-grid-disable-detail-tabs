@@ -111,14 +111,13 @@ Namespace DXSample
 			If Not AllowMasterDetail OrElse GridControl Is Nothing Then
 				Return Nothing
 			End If
-'INSTANT VB NOTE: The variable levelNode was renamed since Visual Basic does not handle local variables named the same as class members well:
-			Dim levelNode_Renamed As GridLevelNode = GetLevelNode()
-			If GridControl.ShowOnlyPredefinedDetails AndAlso (levelNode_Renamed Is Nothing OrElse Not levelNode_Renamed.HasChildren) Then
+			Dim levelNode As GridLevelNode = GetLevelNode()
+			If GridControl.ShowOnlyPredefinedDetails AndAlso (levelNode Is Nothing OrElse Not levelNode.HasChildren) Then
 				Return Nothing
 			End If
 			Dim details As New ArrayList()
 			If GridControl.ShowOnlyPredefinedDetails Then
-				For Each node As GridLevelNode In levelNode_Renamed.Nodes
+				For Each node As GridLevelNode In levelNode.Nodes
 					Dim id As Integer = GetRelationIndex(rowHandle, node.RelationName)
 					If id < -1 Then
 						Continue For
@@ -128,9 +127,8 @@ Namespace DXSample
 			Else
 				Dim count As Integer = GetRelationCount(rowHandle)
 				For n As Integer = 0 To count - 1
-'INSTANT VB NOTE: The variable name was renamed since Visual Basic does not handle local variables named the same as class members well:
-					Dim name_Renamed As String = GetRelationName(rowHandle, n)
-					details.Add(New GridDetailInfo(n, name_Renamed,If(shortInfo, name_Renamed, GetRelationDisplayName(rowHandle, n))))
+					Dim name As String = GetRelationName(rowHandle, n)
+					details.Add(New GridDetailInfo(n, name,If(shortInfo, name, GetRelationDisplayName(rowHandle, n))))
 				Next n
 			End If
 			If details.Count = 0 Then
@@ -143,18 +141,6 @@ Namespace DXSample
 	Public Class DisableViewTabPage
 		Inherits ViewTabPage
 		Implements IXtraTabPage
-
-		Private ReadOnly Property IXtraTabPage_TabControl() As IXtraTab Implements IXtraTabPage.TabControl
-			Get
-				Return MyBase.TabControl
-			End Get
-		End Property
-
-		Private ReadOnly Property IXtraTabPage_Text() As String Implements IXtraTabPage.Text
-			Get
-				Return MyBase.Text
-			End Get
-		End Property
 
 		Public Sub New(ByVal tabControl As ViewTab)
 			MyBase.New(tabControl)

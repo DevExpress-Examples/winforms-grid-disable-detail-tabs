@@ -17,11 +17,15 @@ Namespace DXSample
 'INSTANT VB NOTE: The field relationName was renamed since Visual Basic does not allow fields to have the same name as other class members:
 		Private relationName_Renamed As String
 
-		Public Sub New(ByVal rowHandle As Integer, ByVal relationName As String, ByVal relationIndex As Integer, ByVal enabled As Boolean)
-			Me.rowHandle_Renamed = rowHandle
-			Me.relationName_Renamed = relationName
-			Me.relationIndex_Renamed = relationIndex
-			Me.enabled_Renamed = enabled
+'INSTANT VB NOTE: The variable rowHandle was renamed since Visual Basic does not handle local variables named the same as class members well:
+'INSTANT VB NOTE: The variable relationName was renamed since Visual Basic does not handle local variables named the same as class members well:
+'INSTANT VB NOTE: The variable relationIndex was renamed since Visual Basic does not handle local variables named the same as class members well:
+'INSTANT VB NOTE: The variable enabled was renamed since Visual Basic does not handle local variables named the same as class members well:
+		Public Sub New(ByVal rowHandle_Renamed As Integer, ByVal relationName_Renamed As String, ByVal relationIndex_Renamed As Integer, ByVal enabled_Renamed As Boolean)
+			Me.rowHandle_Renamed = rowHandle_Renamed
+			Me.relationName_Renamed = relationName_Renamed
+			Me.relationIndex_Renamed = relationIndex_Renamed
+			Me.enabled_Renamed = enabled_Renamed
 		End Sub
 
 		Public ReadOnly Property RowHandle() As Integer
