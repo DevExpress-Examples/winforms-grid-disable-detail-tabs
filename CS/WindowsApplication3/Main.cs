@@ -13,37 +13,7 @@ namespace DXSample {
         public Main() {
             InitializeComponent();
         }
-
-        void GenerateCreateTableMethodByGridData(GridView gridView)
-        {
-            gridView.GridControl.ForceInitialize();
-            string method = string.Empty;
-            method =
-                "DataTable CreateTable()" +
-                 "{ DataTable table = new DataTable();" + Environment.NewLine + "DataRow dataRow;" + Environment.NewLine;
-            for (int i = 0; i < gridView.Columns.Count; i++)
-                method += @"table.Columns.Add(""" + gridView.Columns[i].FieldName + @"""" + ", typeof(" + gridView.Columns[i].ColumnType + "));" + Environment.NewLine;
-
-            for (int j = 0; j < gridView.DataRowCount; j++)
-            {
-                method += "dataRow = table.NewRow();" + Environment.NewLine;
-                for (int i = 0; i < gridView.Columns.Count; i++)
-                {
-                    method += @"dataRow[""" + gridView.Columns[i].FieldName + @"""" + "] = ";
-                    if (gridView.Columns[i].ColumnType == typeof(String))
-                        method += @"""" + gridView.GetRowCellValue(j, gridView.Columns[i]).ToString() + @""";" + Environment.NewLine;
-                    else
-                        if (gridView.Columns[i].ColumnType == typeof(DateTime))
-                        method += @"DateTime.Parse(""" + gridView.GetRowCellValue(j, gridView.Columns[i]).ToString() + @""");" + Environment.NewLine;
-                    else
-                        method += gridView.GetRowCellValue(j, gridView.Columns[i]).ToString() + ";" + Environment.NewLine;
-                }
-                method += "table.Rows.Add(dataRow);" + Environment.NewLine + Environment.NewLine;
-            }
-
-            method += "return table;" + Environment.NewLine + " }";
-            Clipboard.SetText(method);
-        }
+     
 
         private void OnFormLoad(object sender, EventArgs e)
         {
