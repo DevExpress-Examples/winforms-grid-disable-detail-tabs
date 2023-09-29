@@ -6,7 +6,7 @@
 
 # WinForms Data Grid - Disable specific detail tabs (master-detail)
 
-This example create a custom grid control with the `DetailTabStyle` event. Handle this event to disable certain detail tabs based on a specific condition:
+This example creates a custom grid control with the `DetailTabStyle` event. Handle this event to disable certain detail tabs based on a specific condition:
 
 ```csharp
 private void myGridView1_DetailTabStyle(object sender, DetailTabStyleEventArgs e) {
